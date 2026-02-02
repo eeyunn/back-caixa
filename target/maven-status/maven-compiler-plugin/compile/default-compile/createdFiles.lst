@@ -1,0 +1,9 @@
+com\caixa\loanapi\entity\LoanStatus.class
+com\caixa\loanapi\dto\LoanRequestDto.class
+com\caixa\loanapi\entity\Loan.class
+com\caixa\loanapi\repository\LoanRepository.class
+com\caixa\loanapi\dto\LoanStatusDto.class
+com\caixa\loanapi\LoanApiApplication.class
+com\caixa\loanapi\service\LoanService$1.class
+com\caixa\loanapi\controller\LoanController.class
+com\caixa\loanapi\service\LoanService.class
