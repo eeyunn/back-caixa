@@ -1,0 +1,40 @@
+### 1. Crear Solicitud (Caso Exitoso)
+POST http://localhost:8080/loans
+Content-Type: application/json
+
+{
+  "applicantName": "Juan Pérez",
+  "amount": 50000.00,
+  "currency": "EUR",
+  "documentId": "12345678Z"
+}
+
+### 2. Listar todas las solicitudes
+GET http://localhost:8080/loans
+
+### 3. Obtener una solicitud específica
+GET http://localhost:8080/loans/1
+
+### 4. Aprobar Solicitud (PENDING -> APPROVED)
+PATCH http://localhost:8080/loans/1/status
+Content-Type: application/json
+
+{
+    "status": "APPROVED"
+}
+
+### 5. Intentar Rechazar una ya Aprobada (ERROR Esperado: Invalid transition)
+PATCH http://localhost:8080/loans/1/status
+Content-Type: application/json
+
+{
+    "status": "REJECTED"
+}
+
+### 6. Cancelar una Aprobada (APPROVED -> CANCELLED)
+PATCH http://localhost:8080/loans/1/status
+Content-Type: application/json
+
+{
+    "status": "CANCELLED"
+}
