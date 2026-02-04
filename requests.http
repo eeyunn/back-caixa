@@ -1,4 +1,4 @@
-### 1. Crear Solicitud (Caso Exitoso)
+### 1. Crear Solicitud #1 (Juan Pérez)
 POST http://localhost:8080/loans
 Content-Type: application/json
 
@@ -9,13 +9,35 @@ Content-Type: application/json
   "documentId": "12345678Z"
 }
 
-### 2. Listar todas las solicitudes
+### 2. Crear Solicitud #2 (María García)
+POST http://localhost:8080/loans
+Content-Type: application/json
+
+{
+  "applicantName": "María García",
+  "amount": 30000.00,
+  "currency": "EUR",
+  "documentId": "87654321A"
+}
+
+### 3. Crear Solicitud #3 (Carlos López)
+POST http://localhost:8080/loans
+Content-Type: application/json
+
+{
+  "applicantName": "Carlos López",
+  "amount": 75000.00,
+  "currency": "USD",
+  "documentId": "11223344B"
+}
+
+### 4. Listar todas las solicitudes
 GET http://localhost:8080/loans
 
-### 3. Obtener una solicitud específica
+### 5. Obtener solicitud específica (ID 1)
 GET http://localhost:8080/loans/1
 
-### 4. Aprobar Solicitud (PENDING -> APPROVED)
+### 6. Aprobar Solicitud #1 (PENDING -> APPROVED) ✅
 PATCH http://localhost:8080/loans/1/status
 Content-Type: application/json
 
@@ -23,7 +45,31 @@ Content-Type: application/json
     "status": "APPROVED"
 }
 
-### 5. Intentar Rechazar una ya Aprobada (ERROR Esperado: Invalid transition)
+### 7. Rechazar Solicitud #2 (PENDING -> REJECTED) ✅
+PATCH http://localhost:8080/loans/2/status
+Content-Type: application/json
+
+{
+    "status": "REJECTED"
+}
+
+### 8. Cancelar Solicitud #1 (APPROVED -> CANCELLED) ✅
+PATCH http://localhost:8080/loans/1/status
+Content-Type: application/json
+
+{
+    "status": "CANCELLED"
+}
+
+### 9. ❌ ERROR: Intentar aprobar una ya rechazada (REJECTED -> APPROVED)
+PATCH http://localhost:8080/loans/2/status
+Content-Type: application/json
+
+{
+    "status": "APPROVED"
+}
+
+### 10. ❌ ERROR: Intentar rechazar una ya cancelada (CANCELLED -> REJECTED)
 PATCH http://localhost:8080/loans/1/status
 Content-Type: application/json
 
@@ -31,10 +77,13 @@ Content-Type: application/json
     "status": "REJECTED"
 }
 
-### 6. Cancelar una Aprobada (APPROVED -> CANCELLED)
-PATCH http://localhost:8080/loans/1/status
+### 11. Aprobar Solicitud #3 (PENDING -> APPROVED) ✅
+PATCH http://localhost:8080/loans/3/status
 Content-Type: application/json
 
 {
-    "status": "CANCELLED"
+    "status": "APPROVED"
 }
+
+### 12. Listar todas las solicitudes (ver estados finales)
+GET http://localhost:8080/loans
